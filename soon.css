@@ -1,0 +1,52 @@
+:root {
+  --ink: #0b0b12; --paper: #f6f2e7; --bone: #d6cfbc; --dim: #9aa0ad; --line: #2a2e3a; --panel: #101433;
+  --green: #3ba55d; --board: #2a6a3d; --off: #6b7076; --magenta: #ff3d8b; --gold: #f6c453;
+  --navy: #243375; /* Hoodie navy, from world/pal.mjs. Also the diary's blue bar. */
+  --dot: "DotGothic16", sans-serif;
+  --dialog-font: "Pixelify Sans", sans-serif;
+  --body-size: clamp(17px, 15px + 0.3vw, 20px);
+  --body: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --hud: 46px; --u: 3px; --scene-h: 540px;
+  color-scheme: dark;
+}
+@font-face { font-family: "DotGothic16"; src: url("assets/fonts/dotgothic16.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible Next"; src: url("assets/fonts/atkinson-hyperlegible-next.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--ink); color: var(--paper); -webkit-text-size-adjust: 100%; }
+body { margin: 0; font: 400 var(--body-size)/1.55 var(--body); overflow-x: clip; }
+img, canvas, video { display: block; max-width: 100%; }
+canvas, .px { image-rendering: pixelated; }
+a { color: var(--gold); text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+a:where(:visited) { color: var(--bone); }
+a:hover { color: var(--paper); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--dot); font-weight: 400; letter-spacing: normal; }
+h1, h2, h3 { text-wrap: balance; }
+p, li, figcaption, dd, dt, blockquote { text-wrap: pretty; }
+.skip { position: fixed; left: 12px; top: 8px; z-index: 60; padding: 6px 10px; background: var(--paper); color: var(--ink); font: 16px/1 var(--dot); transform: translateY(-300%); }
+.skip:hover { color: var(--ink); }
+.skip:focus { transform: none; }
+.hud { position: sticky; top: 0; z-index: 40; height: var(--hud); display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 0 16px; padding: 0 16px; background: var(--ink); border-bottom: 2px solid var(--line); }
+.mark { margin: 0; font: 400 16px/1 var(--dot); letter-spacing: normal; white-space: nowrap; }
+.mark a { display: inline-flex; align-items: center; gap: 9px; color: var(--paper); text-decoration: none; }
+.mark-name { display: inline-block; }
+.dot { display: inline-block; width: 10px; height: 10px; flex: none; background: var(--green); box-shadow: 0 0 0 2px rgba(59, 165, 93, 0.28); }
+.foot { width: min(100% - 32px, 900px); margin: 0 auto; padding: 24px 0 56px; border-top: 2px solid var(--line); font-size: 14px; color: var(--dim); }
+.foot p { margin: 0 0 6px; }
+.skip, .viewer [data-close] { font-family: var(--body); min-height: 44px; }
+.lost-sign { display: inline-grid; justify-items: center; gap: 6px; margin: 0 0 28px; padding: 10px 18px; background: var(--board); box-shadow: 0 0 0 2px var(--paper); color: var(--paper); font: 400 16px/1 var(--dot); }
+.lost-sign span:last-child { font-size: 32px; }
+.soon { width: min(100% - 32px, 900px); margin: 0 auto; padding: 32px 0 48px; }
+.soon-room { margin: 0 0 28px; box-shadow: 0 0 0 2px var(--line); }
+.soon-room img { width: 100%; height: auto; }
+.soon-sign { margin-bottom: 20px; }
+.soon h1 { margin: 0 0 16px; font-size: 40px; line-height: 1.1; }
+.soon p { max-width: 62ch; margin: 0 0 12px; }
+.soon-until { color: var(--bone); }
+.soon-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 0; padding: 0; list-style: none; }
+/* Body font, not DotGothic16: its fixed-width l and I split "LinkedIn" and the email address. */
+.soon-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; background: var(--gold); color: var(--ink); font: 600 16px/1 var(--body); text-decoration: none; }
+.soon-links a:hover { background: var(--paper); color: var(--ink); }
+.soon-links a:active { transform: translateY(2px); }
+/* On a phone the 3:1 room is too small to read, so it crops to the desk and the screens. */
+@media (max-width: 520px) { .soon { padding-top: 20px; } .soon-room img { aspect-ratio: 2 / 1; object-fit: cover; object-position: 72% 50%; } .soon h1 { font-size: 30px; } .soon-links li { flex: 1 1 100%; } .soon-links a { width: 100%; justify-content: center; } }
